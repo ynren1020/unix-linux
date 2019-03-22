@@ -1,0 +1,13 @@
+#!/bin/bash -l
+#PBS -l walltime=12:00:00,nodes=1:ppn=8,pmem=1000mb
+#PBS -m abe
+#PBS -M renxx275@umn.edu
+cd $PBS_O_WORKDIR
+# load modules
+#module load sratoolkit
+#module load hisat2
+#module load samtools
+#module load bwa
+#module load bowtie2/2.2.4_gcc-4.9.2_haswell
+#module load R
+bash test1.sh
