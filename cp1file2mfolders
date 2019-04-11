@@ -1,0 +1,4 @@
+xargs -n 1 cp -v path.py<<<"../UVM/ ../UCS/ ../THYM/"
+xargs -n 1 cp -v path.py<<<"../TGCT/ ../DLBC/ ../ACCnovel/"
+xargs -n 1 cp -v MESO.slurm<<<"../UVM/ ../UCS/ ../THYM/"
+xargs -n 1 cp -v MESO.slurm<<<"../TGCT/ ../DLBC/ ../ACCnovel/"
