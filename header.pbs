@@ -11,3 +11,14 @@ cd $PBS_O_WORKDIR
 #module load bowtie2/2.2.4_gcc-4.9.2_haswell
 #module load R
 bash test1.sh
+
+
+example:
+#!/bin/bash -l        *Specifies how the PBS file should be read (by the bash interpreter). A statement like this is required to be the first line of a PBS script.
+#PBS -l walltime=8:00:00,nodes=1:ppn=8,mem=10gb *The resource request (required). The resource request must specify the job walltime (hours:minutes:seconds), number of nodes, and processor cores per node (ppn). It is recommended to specify either the required memory per processor core (pmem), or the required total memory (mem).
+#PBS -m abe            *Makes the PBS system send message emails when the job aborts, begins, or ends.
+#PBS -M sample_email@umn.edu *Specifies the email address that should be used when the PBS system sends message emails.
+cd ~/program_directory       *change directory commands to get to the job execution location (the script will start in the user home directory)
+module load intel 
+module load ompi/intel 
+mpirun -np 8 program_name < inputfile > outputfile
