@@ -24,5 +24,8 @@ Change each 'foo' (case sensitive due to the I flag) to 'bar'; ask for confirmat
 :%s/foo\C/bar/gc is the same because \C makes the search case sensitive.
 This may be wanted after using :set ignorecase to make searches case insensitive.
 
+#replace a old pathway by a new one:
+:%s/\/home\/me\/data\/\/someoneelse\/data\/gc  #for each replacement, ask for conformation before replacing#
+
 More examples see the link: 
 https://vim.fandom.com/wiki/Search_and_replace
