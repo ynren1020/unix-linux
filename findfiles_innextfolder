@@ -1,0 +1,7 @@
+##sometimes, we need to run same command on a series of same type files placed in different paths (nested in different levels, for example), 
+##here is a simple way we can extract the pathway and file names and output to a *.txt file for furthur use. Alternatively, you can also apply
+##python or R to find those files
+##output all cram files pathway (total 11097 files)
+ls */*/*.cram >/home/yren/project/pacbio/tcga/3star.txt
+…
+ls */*/*/*/*/*.cram >/home/yren/project/pacbio/tcga/6star.txt
