@@ -1,0 +1,4 @@
+cd ~
+touch .Renviron
+open .Renviron
+R_MAX_VSIZE=100Gb
