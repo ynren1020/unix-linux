@@ -27,5 +27,8 @@ This may be wanted after using :set ignorecase to make searches case insensitive
 #replace a old pathway by a new one:
 :%s/\/home\/me\/data\/\/someoneelse\/data\/gc  #for each replacement, ask for conformation before replacing#
 
+##number regx##
+%s/i\d*.bam.txt/i/gc (replace i43000.bam.txt with i) 
+
 More examples see the link: 
 https://vim.fandom.com/wiki/Search_and_replace
