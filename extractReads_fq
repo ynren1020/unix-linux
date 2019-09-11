@@ -1,0 +1,7 @@
+##extract reads from fastq file based on the ids saved in a list##
+way 1:
+software: /home/yang4414/renxx275/software/seqtk/seqtk   (heng li’s tool for dealing with fastq file)
+/home/yang4414/renxx275/software/seqtk/seqtk subseq flnc.fastq colo829T.list > flnc.colo829T.fastq  (the file is empty?)
+way 2:
+Use this simple command of grep, I successfully grab the reads with specific ids from pacbio flank.fastq file downloaded from melanoma website.
+grep -F -f colo829T.list -A 3 flnc.fastq > flnc.colo829T.fastq
