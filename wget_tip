@@ -1,0 +1,6 @@
+##how to resume interrupted download using wget ##
+wget -c url
+wget --continue url
+wget --continue [options] url
+##example:
+wget -c https://downloads-ap.pacbcloud.com/public/dataset/Melanoma2019_IsoSeq/subreads/COLO829T/m54119_190202_095143.subreads.bam
