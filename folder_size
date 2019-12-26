@@ -1,0 +1,2 @@
+#get folder file size and rank by their sizes and show the top 10 largest files#
+du -h /home/yang4414/renxx275/ | sort -hr | head
