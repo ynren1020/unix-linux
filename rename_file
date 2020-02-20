@@ -1,0 +1,10 @@
+The shell can do this pretty easily (here assuming ksh93, zsh, bash, mksh, yash or (some builds of) busybox sh 
+for the ${var//pattern/replacement} operator):
+
+# To rename all of the files in the current directory that currently have spaces in their filenames:
+
+for file in *' '*
+do
+  mv -- "$file" "${file// /_}"
+done
+
