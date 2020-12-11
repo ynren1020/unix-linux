@@ -1,0 +1,8 @@
+# install anaconda3
+# if still want to use python2 we can do
+conda create -n python2 python=2.7 anaconda
+
+# then use this to activate python2
+source ~anaconda3/etc/profile.d/conda.sh
+conda activate python2
+
