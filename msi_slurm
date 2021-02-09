@@ -1,0 +1,19 @@
+#!/bin/bash -l
+#SBATCH --partition=amdsmall
+# set the number of nodes
+#SBATCH --nodes=1
+#SBATCH --ntasks=2
+##SBATCH --exclusive
+#SBATCH --mem=2G
+# set max wallclock time
+#SBATCH --time=24:00:00
+# mail alert at start, end and abortion of execution
+#SBATCH --mail-type=ALL
+# send mail to this address
+#SBATCH --mail-user=renxx275@umn.edu
+
+# run the application
+cd $SLURM_SUBMIT_DIR
+module load sratoolkit
+module load samtools/1.10
+bash ./down_10Worker
