@@ -1,0 +1,83 @@
+Objective: Familiar with the parameters of slurm for submitting a job at MSI or HPC
+Reference: https://www.msi.umn.edu/content/job-submission-and-scheduling-slurm
+
+MSI systems use job queues to efficiently and fairly manage when computations are executed. When computational jobs are submitted to a job queue they wait in the queue until the appropriate computational resources are available.
+ The queuing system which MSI uses is called Slurm. To submit a job to a Slurm queue, users create Slurm job scripts. Slurm job scripts contain information on the resources requested for the calculation, as well as the commands for executing the calculation.
+
+Slurm Script Format
+A Slurm job script is a small text file containing information about what resources a job requires, including time, number of nodes, and memory.   The Slurm script also contains the commands needed to begin executing the desired computation. A sample Slurm job script is shown below.
+
+#!/bin/bash -l        
+#SBATCH --time=8:00:00
+#SBATCH --ntasks=8
+#SBATCH --mem=10g
+#SBATCH --tmp=10g
+#SBATCH --mail-type=ALL  
+#SBATCH --mail-user=sample_email@umn.edu 
+cd ~/program_directory
+module load intel 
+module load ompi/intel 
+mpirun -np 8 program_name < inputfile > outputfile
+
+
+The first line in the Slurm script defines which type of shell the script will be read with (how the system will read the file).  It is recommended to make the first line #!/bin/bash -l
+Commands for the Slurm queuing system begin with #SBATCH.  Lines 2–4 in the above sample script contain the Slurm resource request.   The sample job will require 8 hours, 8 processor cores,  and 10 gigabytes of memory.  The resource request must contain appropriate values; if the requested time, processors, or memory are not suitable for the hardware the job will not be able to run. 
+ The two lines containing #SBATCH --mail-type, and #SBATCH --mail-user=sample_email@umn.edu , are both commands having to do with sending message emails to the user. The first of these lines instruct the Slurm system to send a message email when the job aborts, begins, or ends.  Other options here include NONE, BEGIN, END, and FAIL. The second command specifies the email address to be used. Using the message emails is recommended because the reason for a job failure can often be determined using information in the emails.
+ The rest of the sample Slurm script contains the commands which will be executed to begin the calculation. A Slurm script should contain the appropriate change directory commands to get to the job execution location. A Slurm script also needs to contain module load commands for any software modules that the calculation might need. The last lines of a Slurm script contain commands used to execute the calculation. In the above example the final line contains an execution command to start a program which uses MPI communication to run on 8 processor cores.
+ 
+
+Submitting Job Scripts
+Once a job script is made it is submitted using the sbatch command:
+
+sbatch -p partitionname scriptname   
+Here partitionname is the name of the partition (queue) being submitted to, and scriptname is the name of the job script.  The -p partitionname portion of the command may be omitted, in which case the job would be submitted to whichever partition is set as the default.  Alternatively, the partition specification can be placed inside the job script (see below).
+
+To view all of the jobs submitted by a particular user use the command:
+squeue -u username
+This command will display the status of the specified jobs, and the associated job ID numbers. The command squeue by itself will show all jobs on the system.
+
+To cancel a submitted job use the command:
+scancel jobIDnumber
+Here jobIDnumber should be replaced with the appropriate job ID number determined by using the squeue command.
+ 
+Slurm Script Commands
+Below is a table summarizing some commands that can be used inside Slurm job scripts. The first four commands (interpreter specification, and resource request) are required, while the other commands are optional. Each of the below Slurm commands is meant to go on a single line within a Slurm script.
+ 
+Slurm command Effect
+
+#!/bin/bash -l
+
+Specifies how the Slurm file should be read (by the bash interpreter). A statement like this is required to be the first line of a Slurm script.
+
+#SBATCH --time=8:00:00
+
+Specifies the maximum limit for how long the job will be allowed to run. (8 hours)
+
+#SBATCH --ntasks=8
+
+Specifies the number of processors (cores) that will be reserved for this job.  (8)
+
+#SBATCH --mem=10g
+
+Specifies the maximum limit for memory usage. This job will die if the application tries to use more than 10GB of memory.
+
+#SBATCH --tmp=10g	Specifies 10 GB of temporary disk will be available for this job in /tmp.
+#SBATCH --mail-type=ALL  
+
+Specifies which events will trigger an email message. Other options here include NONE, BEGIN, END, and FAIL. 
+
+
+
+#SBATCH --mail-user=me@umn.edu
+
+Specifies the email address that should be used when the Slurm system sends message emails.
+
+#SBATCH -p small,mygroup
+
+Specifies the partition to be the “small” partition, or a partition named “mygroup”. The job will start at the earliest time one of these partitions can accommodate the job.
+
+#SBATCH --gres=gpu:v100:2
+
+#SBATCH -p v100
+
+Request two v100 GPUs for a job submitted to the V100 queue.
