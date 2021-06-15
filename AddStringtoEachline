@@ -1,0 +1,3 @@
+# add a string to the beginning of each line in a file ---
+awk '$0="Rcript lncgsea_pipe.R /panfs/home/yang4414/renxx275/project_yren/tcga/fpkm/PRAD.FPKM.txt PRAD "$0' RefLnc_lncRNA_tumor_sample_FPKM_tid > cmds_R.txt
+
