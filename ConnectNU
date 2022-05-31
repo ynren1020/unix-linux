@@ -1,0 +1,12 @@
+# in my mac configure file, do the following:
+cd ~/.ssh/config
+
+# add and save 
+Host quest
+  Hostname quest.northwestern.edu
+  User  NETID
+  Port 22
+  
+# run this command below:
+ssh-copy-id NETID@quest.northwestern.edu
+  
